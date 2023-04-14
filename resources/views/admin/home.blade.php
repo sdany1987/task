@@ -50,6 +50,7 @@
                                     <td>{{$description}}</td>
                                     <td>
                                         <a onclick="viewRiskDet('{{$id}}');" data-toggle="modal" data-target=".bd-example-modal-lg1" href="#" title="View"><i class="fa fa-eye"></i></a>
+                                        <a style="text-decoration: none;" href="{{ route('admin.risk.editRiskDet', ['id' => $id, 'type' => 3])  }}" title="View"><i class="fa fa-edit"></i></a>
                                         <a onclick="deleteItem1('{{$id}}');" href="#" title="Delete"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>

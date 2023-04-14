@@ -43,4 +43,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'is_admin'], function ($route
     $router->post('/risk/create', [AdminController::class, 'RiskPost'])->name('admin.risk.post');
     $router->post('/risk/delete', [AdminController::class, 'DeleteRisk'])->name('admin.risk.delete');
     $router->post('/risk/view', [AdminController::class, 'ViewRisk'])->name('admin.risk.view');
+    $router->get('/editRiskDet/{id}/{type}', [AdminController::class, 'editRiskDet'])->name('admin.risk.editRiskDet');
 });

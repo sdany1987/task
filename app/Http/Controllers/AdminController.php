@@ -32,6 +32,13 @@ class AdminController extends Controller
         return view('admin.risk');
     }
 
+    public function editRiskDet($id, $types)
+    {
+        $view_risk = Risk::find($id);
+
+        return view('admin.editRiskDet', compact('view_risk', 'types'));
+    }
+
     public function RiskPost(Request $request)
     {
 
@@ -49,9 +56,28 @@ class AdminController extends Controller
         $risk->created_by = 1;  //1 - admin
         $risk->user_id = auth()->user()->id ?? 0;
         $risk->status = 1;
-        $risk->save();
+        // $risk->save();
 
-        $msg = 'Risk has been created successfully';
+        $savetypes = $request->savetypes ?? 2;
+        $saveid = $request->saveid ?? '';
+        if ($savetypes == '3') {
+            $msg = 'Risk has been updated successfully';
+            // $risk->update($saveid);
+            $dataUpdate = [
+                'name' => $name,
+                'description' => $description,
+                'created_by' => 2,
+                'user_id' => auth()->user()->id ?? 0,
+                'status' => 1,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
+            Risk::where('id', $saveid)->update($dataUpdate);
+        } else {
+            $msg = 'Risk has been created successfully';
+            $risk->save();
+        }
+
+        // $msg = 'Risk has been created successfully';
         $savetype = $request->savetype ?? 2;
         if ($savetype == '1') {
             return redirect()->route('admin.risk.create')->with('success', $msg);
